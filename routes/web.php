@@ -28,5 +28,5 @@ Route::prefix('admin')
         Route::resource('posts', 'PostController');
     });
 
-Route::get('posts', 'PostController@index')->name('posts.index');
+Route::get('posts', 'PostController@index')->name('posts');
 Route::get('posts/{slug}', 'PostController@show')->name('posts.show');

@@ -20,7 +20,7 @@
                         <td>{{$post->content}}</td>
                         <td>{{$post->user->name}}</td>
                         <td>
-                            <a href="{{route('guest.posts.show', $post->slug)}}">Vedi</a>
+                            <a href="{{route('posts.show', $post->slug)}}">Vedi</a>
                         </td>
                     </tr>
                 @endforeach
