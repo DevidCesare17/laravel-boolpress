@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Post;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Post;
+use App\User;
 
 class PostController extends Controller
 {
@@ -16,9 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $user_id = Auth::id();
-        $posts = Post::where('user_id', $user_id)->get();
-        return view('admin.posts.index', compact('posts'));
+        $posts = Post::all();
+        return view('guest.posts.index', compact('posts'));
     }
 
     /**
@@ -45,22 +43,22 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->first();
-        return view('admin.posts.show', compact('post'));
+        return view('guest.posts.show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
         //
     }
@@ -69,10 +67,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -80,10 +78,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
         //
     }
