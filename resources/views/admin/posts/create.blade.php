@@ -9,22 +9,22 @@
 
             <div class="form-group">
               <label for="title">Titolo</label>
-              <input type="text" class="form-control" id="title" aria-describedby="emailHelp" name="title" placeholder="Inserisci titolo">
+              <input type="text" class="form-control" id="title" aria-describedby="emailHelp" name="title" placeholder="Inserisci titolo" value="{{old('title')}}">
             </div>
             <div class="form-group">
                 <label for="slug">Slug</label>
-                <input type="text" class="form-control" id="slug" aria-describedby="emailHelp" name="slug" placeholder="Inserisci slug">
+                <input type="text" class="form-control" id="slug" aria-describedby="emailHelp" name="slug" placeholder="Inserisci slug" value="{{old('slug')}}">
               </div>
             <div class="form-group">
                 <label for="content">Contenuto</label>
                 <textarea name="content" class="form-control" id="content" name="content" cols="30" rows="10"></textarea>
             </div>
-            {{-- <div class="form-group">
+            <div class="form-group">
                 <label for="image">Immagine</label>
                 <input type="file" id="image" aria-describedby="emailHelp" name="image" accept="image/*">
-            </div> --}}
+            </div>
             <button type="submit" class="btn btn-primary">Invia!</button>
-          </form>
+        </form>
 
         @if ($errors->any())
             <div class="alert alert-danger">

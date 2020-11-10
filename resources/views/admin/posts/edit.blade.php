@@ -3,6 +3,12 @@
 @section('content')
     <div class="container">
         <h2>Modifica Post - {{$post->title}}</h2>
+        <div class="btn btn-info">
+            <a href="{{route('admin.posts.index')}}" class="badge badge-info">Indietro Index</a>
+        </div>
+        <div class="btn btn-info">
+            <a href="{{route('admin.posts.show', $post->slug)}}" class="badge badge-info">Indietro Vedi</a>
+        </div>
         <form action="{{route('admin.posts.update', $post->slug)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -19,10 +25,10 @@
                 <label for="content">Contenuto</label>
                 <textarea name="content" class="form-control" id="content" name="content" cols="30" rows="10">{{old('content') ? old('content') : $post->content}}</textarea>
             </div>
-            {{-- <div class="form-group">
+            <div class="form-group">
                 <label for="image">Immagine</label>
                 <input type="file" id="image" aria-describedby="emailHelp" name="image" accept="image/*">
-            </div> --}}
+            </div>
             <button type="submit" class="btn btn-warning">Invia mofifiche!</button>
           </form>
 

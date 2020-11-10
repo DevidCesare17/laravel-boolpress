@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        <div class="btn btn-info">
+            <a href="{{route('admin.posts.create')}}" class="badge badge-info">Crea Post</a>
+        </div>
         <table class="table">
             <thead>
                 <tr>
