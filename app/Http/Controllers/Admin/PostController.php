@@ -6,6 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -28,7 +29,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -39,7 +40,27 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'slug' => 'required'
+            // 'image' => 'image'
+        ]);
+        
+        // $id = Auth::id();
+        // $og_file_img = $data['image']->getClientOriginalName();
+        // $path = Storage::disk('public')->putFileAs("image/$id", $data['image'], $og_file_img);
+
+        $newPost = new Post;
+        $newPost->user_id = Auth::id();
+        $newPost->title = $data['title'];
+        $newPost->content = $data['content'];
+        $newPost->slug = $data['slug'];
+        // $newPost->image = $path;
+        $newPost->save();
+
+        return redirect()->route('admin.posts.show', $newPost->slug);
     }
 
     /**
@@ -60,9 +81,10 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Post $post, $slug)
     {
-        //
+        $post = Post::where('slug', $slug)->first();
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -72,9 +94,19 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Post $post, $slug)
     {
-        //
+        $data = $request->all();
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'slug' => 'required'
+            // 'image' => 'image'
+        ]);
+
+        $post = Post::where('slug', $slug)->first();
+        $post->update($data);
+        return redirect()->route('admin.posts', compact('posts'));
     }
 
     /**
@@ -83,8 +115,10 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($slug)
     {
-        //
+        $post = Post::where('slug', $slug)->first();
+        $post->delete();
+        return redirect()->route('admin.posts.index');
     }
 }
