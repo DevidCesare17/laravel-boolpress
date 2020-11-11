@@ -1,0 +1,1 @@
+<h2>Hai appena creato un post: {{$post->title}}</h2>

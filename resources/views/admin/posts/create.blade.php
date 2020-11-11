@@ -3,6 +3,9 @@
 @section('content')
     <div class="container">
         <h2>Crea Post</h2>
+        <div class="btn btn-info">
+            <a href="{{route('admin.posts.index')}}" class="badge badge-info">Indietro</a>
+        </div>
         <form action="{{route('admin.posts.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')

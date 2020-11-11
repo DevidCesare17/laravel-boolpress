@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\SendNewMail;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -59,6 +61,8 @@ class PostController extends Controller
         $newPost->slug = $data['slug'];
         $newPost->image = $path;
         $newPost->save();
+
+        Mail::to('mail@mail.it')->send(new SendNewMail($newPost));
 
         return redirect()->route('admin.posts.show', $newPost->slug);
     }
